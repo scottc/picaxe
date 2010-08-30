@@ -5,9 +5,9 @@
     <movie disabled="False" />
     <movie input="" />
     <movie path="bin\picaxe.swf" />
-    <movie fps="30" />
-    <movie width="800" />
-    <movie height="600" />
+    <movie fps="60" />
+    <movie width="550" />
+    <movie height="400" />
     <movie version="9" />
     <movie background="#FFFFFF" />
   </output>
@@ -20,8 +20,7 @@
     <option directives="" />
     <option flashStrict="False" />
     <option mainClass="Main" />
-    <option override="False" />
-    <option verbose="False" />
+    <option forcetraces="False" />
     <option additional="" />
   </build>
   <!-- haxelib libraries -->

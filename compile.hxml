@@ -1,0 +1,5 @@
+-cp src
+-swf9 bin\picaxe.swf
+-main Main
+-swf-header 550:400:60:FFFFFF
+--remap nme:flash

@@ -1,0 +1,23 @@
+-swf9 bin\picaxe.swf
+-cp src
+-main Main
+-swf-header 550:400:60:FFFFFF
+--remap nme:flash
+
+--next
+
+-neko bin\picaxe.n
+-cp src
+-main Main
+-lib nme
+--remap flash:nme
+
+--next
+
+-cpp bin\cpp
+-cp src
+-main Main
+-lib nme
+-debug
+--remap flash:nme
+--remap neko:cpp
