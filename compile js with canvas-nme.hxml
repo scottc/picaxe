@@ -1,5 +1,6 @@
 -js bin\picaxe.js
 -cp src
+-cp lib\canvas-nme
 -main Main
 -lib nme
 --remap flash:nme

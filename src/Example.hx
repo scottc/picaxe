@@ -5,12 +5,7 @@
 
 package ;
 
-class Example 
+class Example
 {
-
-	public function new() 
-	{
-		
-	}
-	
+	public function new(){}
 }
