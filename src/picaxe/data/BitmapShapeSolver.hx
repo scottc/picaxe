@@ -10,6 +10,7 @@ import picaxe.geom.Vector;
 import picaxe.shape.Body;
 import picaxe.shape.Circle;
 import picaxe.shape.Polygon;
+import picaxe.shape.Shape;
 
 /**
  * This Class contains static functions to convert geometric shapes into
@@ -130,8 +131,8 @@ class BitmapShapeSolver
 		bms.plotPoint(p);
 		return bms;
 	}
-	public static function body(body:Body):BitmapShape {
-		switch(body.type) {
+	public static function shape(s:Shape):BitmapShape {
+		/*switch(s) {
 			case BodyType.circle:
 				return circle(cast(body,Circle));
 			case BodyType.polygon:
@@ -140,7 +141,10 @@ class BitmapShapeSolver
 				//line(cast(body,Line));
 			default:
 				//point();
-		}
+		}*/
+		
+		return point(Point.fromVector(s));
+		
 		return null;
 	}
 }

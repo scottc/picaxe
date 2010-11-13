@@ -23,7 +23,7 @@ class Point
 	 * 
 	 * @return a Point
 	 */
-	public static inline function fromPoint(v:Vector):Point {
+	public static inline function fromVector(v:Vector):Point {
 		return new Point(Math.round(v.x), Math.round(v.y));
 	}
 }

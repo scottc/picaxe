@@ -11,10 +11,12 @@ import picaxe.geom.Vector;
  */
 class Shape extends Vector
 {
+	public var velocity:Vector;
 	
 	public function new() 
 	{
 		super();
+		velocity = new Vector();
 	}
 	
 }

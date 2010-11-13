@@ -4,6 +4,7 @@
  */
 
 package ;
+import picaxe.col.ColorTools;
 import picaxe.data.BitmapData;
 import picaxe.data.BitmapShape;
 import picaxe.display.Bitmap;
@@ -12,6 +13,7 @@ import picaxe.shape.Circle;
 import picaxe.geom.Vector;
 import picaxe.World;
 import picaxe.data.BitmapShapeSolver;
+import picaxe.col.BitmapCollisionSolver;
 
 
 #if flash
@@ -44,6 +46,7 @@ class Example
 		
 		c.x = 100;
 		c.y = 100;
+		c.velocity.y = c.velocity.x = 0;
 		
 		c.radius = 83;
 		
@@ -54,6 +57,20 @@ class Example
 		bms2.drawOnto(bmd, 0xffff00ff);
 		bms3.drawOnto(bmd, 0xffff00ff);
 		
+		
+		
+		var c2:Circle = new Circle();
+		
+		c2.x = 100;
+		c2.y = 100;
+		c2.velocity.y = c2.velocity.x = 10;
+		
+		c2.radius = 83;
+		
+		trace(
+		BitmapCollisionSolver.testPath(bmd, c2, ColorTools.isOpaque));
+		
+		//trace(ColorTools.isOpaque(0xffccddaa));
 		//trace(bms.getBitmap().x);
 	}
 }
