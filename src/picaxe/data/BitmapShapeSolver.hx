@@ -6,6 +6,7 @@
 package picaxe.data;
 
 import picaxe.geom.Point;
+import picaxe.geom.Vector;
 import picaxe.shape.Body;
 import picaxe.shape.Circle;
 import picaxe.shape.Polygon;
@@ -115,7 +116,14 @@ class BitmapShapeSolver
 		return bms;
 	}
 	public static function polygon(poly:Polygon):BitmapShape {
-		return null;
+		var prev:Vector = poly.vertices.last();
+		var bms:BitmapShape = new BitmapShape();
+		
+		for (vert in poly.vertices) {
+			//bms.pixels.concat(line(prev, vert).pixels);
+		}
+		
+		return bms;
 	}
 	static public function point(p:Point):BitmapShape {
 		var bms:BitmapShape = new BitmapShape();
