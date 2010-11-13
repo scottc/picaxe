@@ -16,16 +16,21 @@ import nme.events.Event;
 
 import haxe.Timer;
 
+import picaxe.display.Renderer;
+
 class World 
 {
 
 	public var timer:Timer;
 	public var logic:Void->Void;
-	public var fps:Int = 30;
-	public var sps:Int = 30;//steps per second
+	public static var STEPS_PER_SECOND:Int = 60;
+	
+	public var renderers:List<Dynamic>;
 	
 	public function new() 
 	{
+		renderers = new List<Dynamic>();
+		//throw "This is an abstract class";
 		init();	
 	}
 	/**
@@ -38,7 +43,7 @@ class World
 		doRender();//kick start the rendering
 		
 		//setup our stepper
-		timer = new Timer(Math.ceil(1000/30));// 60 ticks per second, to match our 60fps
+		timer = new Timer(Math.ceil(1000/STEPS_PER_SECOND));// 60 ticks per second, to match our 60fps
 		timer.run = doStep;
 	}
 	
@@ -53,7 +58,13 @@ class World
 	 * Render the display objects to screen, on frame event at 60 frames per second
 	 */
 	private function doRender(?event:Event) {
-		trace("render!! - update graphic positions here");
+		for (object in renderers) {
+			//if(object.hasChanged)
+			object.render();
+		}
+		
+		//remove all jobs items from Que.
+		//renderers.clear();
 	}
 	
 }

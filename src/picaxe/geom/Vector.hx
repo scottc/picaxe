@@ -18,4 +18,5 @@ class Vector
 	public inline function clone():Vector {
 		return new Vector(x, y);
 	}
+	
 }
