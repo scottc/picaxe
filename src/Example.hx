@@ -11,6 +11,7 @@ import picaxe.display.Bitmap;
 import picaxe.geom.Point;
 import picaxe.shape.Circle;
 import picaxe.geom.Vector;
+import picaxe.shape.Polygon;
 import picaxe.World;
 import picaxe.data.BitmapShapeSolver;
 import picaxe.col.BitmapCollisionSolver;
@@ -38,15 +39,15 @@ class Example
 		
 		
 		var bms:BitmapShape = BitmapShapeSolver.line(
-			new Point(242, 300),
-			new Point(324, 363)
+			new Point(30, 300),
+			new Point(300, 30)
 		);
 		
 		var c:Circle = new Circle();
 		
 		c.x = 100;
 		c.y = 100;
-		c.velocity.y = c.velocity.x = 0;
+		c.velocity.y = c.velocity.x = 10;
 		
 		c.radius = 83;
 		
@@ -57,18 +58,38 @@ class Example
 		bms2.drawOnto(bmd, 0xffff00ff);
 		bms3.drawOnto(bmd, 0xffff00ff);
 		
+		var p:Polygon = new Polygon();
+		p.vertices.add(new Vector(0, -3));
+		p.vertices.add(new Vector(-3, 0));
+		p.vertices.add(new Vector(0, 3));
+		p.vertices.add(new Vector(3, 0));
 		
+		p.x = 300;
+		p.y = 300;
+
+		var bms4:BitmapShape = BitmapShapeSolver.polygon(p);
+
+		bms4.drawOnto(bmd, 0xff000000);
+
 		
 		var c2:Circle = new Circle();
 		
-		c2.x = 100;
-		c2.y = 100;
-		c2.velocity.y = c2.velocity.x = 10;
+		c2.x = 0;
+		c2.y = 0;
+		c2.velocity.x = 300;
+		c2.velocity.y = 301;
 		
-		c2.radius = 83;
+		c2.radius = 3;
 		
-		trace(
-		BitmapCollisionSolver.testPath(bmd, c2, ColorTools.isOpaque));
+		var bms:BitmapShape = BitmapShapeSolver.line(
+			new Point(0, 0),
+			new Point(300, 300)
+		);
+		
+		BitmapCollisionSolver.testPath(bmd, c2, ColorTools.isOpaque);
+		
+		
+		bms.drawOnto(bmd, 0xff00ff00);
 		
 		//trace(ColorTools.isOpaque(0xffccddaa));
 		//trace(bms.getBitmap().x);

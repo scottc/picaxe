@@ -11,7 +11,7 @@ class ColorTools
 	/**
 	 * Converts a color into a human friendly format.
 	 * @param	argb32
-	 * @return	a:(0-255), r:(0-255), g:(0-255), b:(0-255)
+	 * @return	{a:(0-255), r:(0-255), g:(0-255), b:(0-255)}
 	 */
 	public static inline function toARGB(argb32:UInt){
 		return 
@@ -41,15 +41,15 @@ class ColorTools
 	 * @return	true if the color is fully opaque, otherwise false
 	 */
 	public static inline function isOpaque(argb32:UInt) {
-		return (255 == argb32 >> 24 & 0xFF) ? true : false;
+		return 255 == argb32 >> 24 & 0xFF;
 	}
 	/**
 	 * 
 	 * @param	color
 	 * @return	true if the color is fully transperent, otherwise false
 	 */
-	public static inline function isTransperent(color:UInt) {
-		return (0 == color >> 24 & 0xFF) ? true : false;
+	public static inline function isTransperent(argb32:UInt) {
+		return 0 == argb32 >> 24 & 0xFF;
 	}
 	/**
 	 * 
@@ -57,6 +57,7 @@ class ColorTools
 	 * @return	true if the color is a shade of gray, otherwise false
 	 */
 	public static inline function isGrayScale(color:UInt) {
-		return (color >> 24 & 0xFF == color >> 16 & 0xFF && color >> 24 & 0xFF == color >> 8 & 0xFF) ? true : false;
+		return color >> 24 & 0xFF == color >> 16 & 0xFF &&
+				color >> 24 & 0xFF == color >> 8 & 0xFF;
 	}
 }

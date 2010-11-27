@@ -14,6 +14,10 @@ class Point
 		this.x = x;
 		this.y = y;
 	}
+	public inline function add(p:Point) {
+		x += p.x;
+		y += p.y;
+	}
 	public inline function clone():Point {
 		return new Point(x, y);
 	}
@@ -25,5 +29,9 @@ class Point
 	 */
 	public static inline function fromVector(v:Vector):Point {
 		return new Point(Math.round(v.x), Math.round(v.y));
+	}
+	
+	public inline function toString() {
+		return "Point(" + x + ", " + y + ")";
 	}
 }

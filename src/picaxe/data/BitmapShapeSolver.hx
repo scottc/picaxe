@@ -105,7 +105,7 @@ class BitmapShapeSolver
 		var y = p0.y;
 		
 		if (p0.y < p1.y) ystep = 1; else ystep = -1;
-		for (x in p0.x...p1.x) {
+		for (x in p0.x...p1.x+1) {
 			if (steep) bms.plot(y, x); else bms.plot(x, y);
 			
 			error = error + deltay;
@@ -120,8 +120,13 @@ class BitmapShapeSolver
 		var prev:Vector = poly.vertices.last();
 		var bms:BitmapShape = new BitmapShape();
 		
-		for (vert in poly.vertices) {
-			//bms.pixels.concat(line(prev, vert).pixels);
+		bms.x = Math.round(poly.x);
+		bms.y = Math.round(poly.y);
+		
+		for (vert in poly.vertices) {//TODO: optimise so the corner points arnt drawn twice.
+			for (pixel in line(Point.fromVector(prev), Point.fromVector(vert)).pixels)
+				bms.pixels.push(pixel);
+			prev = vert;
 		}
 		
 		return bms;
@@ -131,6 +136,17 @@ class BitmapShapeSolver
 		bms.plotPoint(p);
 		return bms;
 	}
+	/*
+	static public function rect():BitmapShape {
+		//only use 2 loops to improve proformace
+		for (var pixel:Int in x...x+width) {
+			//draw top and bottom lines
+		}
+		for (var pixel:Int in y+1...y+width-1) {//minus a pixel from the top and bottom
+			//draw left and right lines
+		}
+	}
+	*/
 	public static function shape(s:Shape):BitmapShape {
 		/*switch(s) {
 			case BodyType.circle:

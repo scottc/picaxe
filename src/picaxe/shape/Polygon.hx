@@ -15,6 +15,7 @@ class Polygon extends Shape
 	public function new() 
 	{
 		super();
+		vertices = new List<Vector>();
 	}
 	
 }
