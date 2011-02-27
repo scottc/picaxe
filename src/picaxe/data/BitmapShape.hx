@@ -11,6 +11,8 @@ import picaxe.shape.Shape;
 
 import picaxe.math.PicMath;
 
+
+
 class BitmapShape
 {
 	public var x:Int;
@@ -33,7 +35,12 @@ class BitmapShape
 	public inline function plotPoint(p:Point) {
 		pixels.push(p);
 	}
-	public function drawOnto(bmd:BitmapData, color:UInt){
+	/**
+	 * 
+	 * @param	bmd
+	 * @param	argb32 (eg 0xff996633)
+	 */
+	public function drawOnto(bmd:BitmapData, color:Int){
 		for (pixel in pixels) {
 			bmd.setPixel32(x+pixel.x, y+pixel.y, color);
 		}

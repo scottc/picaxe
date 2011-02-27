@@ -148,19 +148,15 @@ class BitmapShapeSolver
 	}
 	*/
 	public static function shape(s:Shape):BitmapShape {
-		/*switch(s) {
-			case BodyType.circle:
-				return circle(cast(body,Circle));
-			case BodyType.polygon:
-				return polygon(cast(body,Polygon));
+		switch(Type.getClass(s)) {
+			case Circle:
+				return circle(cast(s,Circle));
+			case Polygon:
+				return polygon(cast(s,Polygon));
 			//case BodyType.line:
 				//line(cast(body,Line));
 			default:
-				//point();
-		}*/
-		
-		return point(Point.fromVector(s));
-		
-		return null;
+				return point(Point.fromVector(s));
+		}
 	}
 }

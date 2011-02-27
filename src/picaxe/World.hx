@@ -20,51 +20,48 @@ import picaxe.display.Renderer;
 
 class World 
 {
-
 	public var timer:Timer;
 	public var logic:Void->Void;
 	public static var STEPS_PER_SECOND:Int = 60;
 	
 	public var renderers:List<Dynamic>;
 	
-	public function new() 
+	private function new() 
 	{
-		renderers = new List<Dynamic>();
-		//throw "This is an abstract class";
+		if (Type.getClass(this) == World)
+			throw "This is abstract class";
 		init();	
 	}
 	/**
 	 * Setup our game envioment
 	 */
-	function init()
+	private function init()
 	{
 		//setup our renderer
-		Lib.current.addEventListener( Event.ENTER_FRAME, doRender);
-		doRender();//kick start the rendering
+		Lib.current.addEventListener( Event.ENTER_FRAME, callRender);
+		//doRender();//kick start the rendering
 		
 		//setup our stepper
 		timer = new Timer(Math.ceil(1000/STEPS_PER_SECOND));// 60 ticks per second, to match our 60fps
 		timer.run = doStep;
 	}
-	
+	public function add(displayObject) {
+		Lib.current.addChild(displayObject);
+	}
 	/**
 	 * Do a physics step, at 60 steps per second (independent of framerate)
 	 */
-	private function doStep() {
-		trace("tick!! - place game logic here");
+	public function doStep():Void {
+		throw "Abstract Method";
 	}
 	
 	/**
 	 * Render the display objects to screen, on frame event at 60 frames per second
 	 */
-	private function doRender(?event:Event) {
-		for (object in renderers) {
-			//if(object.hasChanged)
-			object.render();
-		}
-		
-		//remove all jobs items from Que.
-		//renderers.clear();
+	public function doRender():Void {
+		throw "Abstract Method";
 	}
-	
+	private inline function callRender(?event:Event):Void {
+		doRender();
+	}
 }

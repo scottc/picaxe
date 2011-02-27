@@ -17,81 +17,68 @@ import picaxe.data.BitmapShapeSolver;
 import picaxe.col.BitmapCollisionSolver;
 
 
-#if flash
-import flash.Lib;
-import flash.events.Event;
-#else
-import nme.Lib;
-import nme.events.Event;
-#end
-
-class Example
+class Example extends World
 {
+	var ball:Circle; var ballbm:Bitmap;
+	var poly:Polygon; var polybm:Bitmap;
+	var point:Point;
+	
+	var bmd:BitmapData;
+	
 	public function new() {
+		super();
 		
-		//note: colors in flash are sometimes ARGB, RGBA othertimes
-
-		var bmd:BitmapData = new BitmapData(1000, 1000, true, 0x00000000);
+		//Make Circle
+		ball = new Circle();
+		ball.set(10, 10);
+		ball.radius = 10;
+		ball.velocity = new Vector(2, 2);
+		
+		//Make Circle Display Object (bitmap)
+		var ballbmd:BitmapData = new BitmapData(Math.ceil(ball.radius * 2)+1, Math.ceil(ball.radius * 2)+1,true, 0x00ffffff);
+		ballbm = new Bitmap(ballbmd);
+		BitmapShapeSolver.circle(ball).drawOnto(ballbmd, 0xffff00ff);
+		
+		//Make Polygon
+		poly = new Polygon();//triangle
+		poly.vertices.add(new Vector( 10, 0));
+		poly.vertices.add(new Vector( 0, 20));
+		poly.vertices.add(new Vector( 20, 20));
+		poly.velocity = new Vector(1, 1);
+		
+		//Make Polygon Display Object (bitmap)
+		var polybmd:BitmapData = new BitmapData(21, 21, true, 0x00ffffff);
+		polybm = new Bitmap(polybmd);
+		BitmapShapeSolver.polygon(poly).drawOnto(polybmd, 0xff00ffff);
+		
+		//Vector example
+		//...
+		
+		//Make something to collide against aka make level
+		bmd = new BitmapData(550, 400, true, 0x00ffffff);
 		var bm:Bitmap = new Bitmap(bmd);
-		Lib.current.addChild(bm);
+		BitmapShapeSolver.line(new Point(0, 300), new Point(550, 100)).drawOnto(bmd, 0xffff0000);
 		
-		//bmd.setPixel(300, 300, 0xff000000);
+		//add display objects to the display
+		add(bm);
+		add(ballbm);
+		add(polybm);
+	}
+	override public function doStep():Void
+	{
+		//Circle Example
+		ball.add(ball.velocity);
+		BitmapCollisionSolver.testPath(bmd, ball, ColorTools.isOpaque);
 		
+		//Polygon Example
+		poly.add(poly.velocity);
+		//BitmapCollisionSolver.testPath(bmd, poly, ColorTools.isOpaque);
 		
-		var bms:BitmapShape = BitmapShapeSolver.line(
-			new Point(30, 300),
-			new Point(300, 30)
-		);
-		
-		var c:Circle = new Circle();
-		
-		c.x = 100;
-		c.y = 100;
-		c.velocity.y = c.velocity.x = 10;
-		
-		c.radius = 83;
-		
-		var bms2:BitmapShape = BitmapShapeSolver.point(new Point(100,100));
-		var bms3:BitmapShape = BitmapShapeSolver.circle(c);
-		
-		bms.drawOnto(bmd, 0xffff00ff);
-		bms2.drawOnto(bmd, 0xffff00ff);
-		bms3.drawOnto(bmd, 0xffff00ff);
-		
-		var p:Polygon = new Polygon();
-		p.vertices.add(new Vector(0, -3));
-		p.vertices.add(new Vector(-3, 0));
-		p.vertices.add(new Vector(0, 3));
-		p.vertices.add(new Vector(3, 0));
-		
-		p.x = 300;
-		p.y = 300;
-
-		var bms4:BitmapShape = BitmapShapeSolver.polygon(p);
-
-		bms4.drawOnto(bmd, 0xff000000);
-
-		
-		var c2:Circle = new Circle();
-		
-		c2.x = 0;
-		c2.y = 0;
-		c2.velocity.x = 300;
-		c2.velocity.y = 301;
-		
-		c2.radius = 3;
-		
-		var bms:BitmapShape = BitmapShapeSolver.line(
-			new Point(0, 0),
-			new Point(300, 300)
-		);
-		
-		BitmapCollisionSolver.testPath(bmd, c2, ColorTools.isOpaque);
-		
-		
-		bms.drawOnto(bmd, 0xff00ff00);
-		
-		//trace(ColorTools.isOpaque(0xffccddaa));
-		//trace(bms.getBitmap().x);
+		//Vector Example
+	}
+	override public function doRender():Void 
+	{
+		ball.copyPositionTo(ballbm);
+		poly.copyPositionTo(polybm);
 	}
 }
