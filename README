@@ -1,3 +1,11 @@
 Picaxe
 
 Picaxe is a bitmap collision engine, which can be used to make terrain destruction artillery games similar to scorched earth, worms armageddon, hedgewars or gunbound.
+
+This project has been made obsolete.
+
+I suggest you use this instead:
+http://code.google.com/p/nape/
+
+Example:
+http://deltaluca.me.uk/doc/swf/Destroyable%20Terrain%20Demo.html
