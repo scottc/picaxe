@@ -4,9 +4,10 @@
  */
 
 package ;
+
 import flash.geom.ColorTransform;
 import flash.geom.Rectangle;
-import picaxe.col.ColorTools;
+
 import picaxe.data.BitmapData;
 import picaxe.data.BitmapShape;
 import picaxe.display.Bitmap;
@@ -17,6 +18,8 @@ import picaxe.shape.Polygon;
 import picaxe.World;
 import picaxe.data.BitmapShapeSolver;
 import picaxe.col.BitmapCollisionSolver;
+
+using picaxe.color.ARGBHelper;
 
 
 class Example extends World
@@ -77,12 +80,12 @@ class Example extends World
 		ball.velocity.x *= 0.98;
 		ball.velocity.y *= 0.98;
 		
-		if (BitmapCollisionSolver.testPath(bmd, ball, ColorTools.isOpaque))
+		if (BitmapCollisionSolver.testPath(bmd, ball, ARGBHelper.isOpaque))
 		{
 			ball.velocity.y *= -1;
 		}
 
-		if (BitmapCollisionSolver.testPath(bmd, poly, ColorTools.isOpaque)){
+		if (BitmapCollisionSolver.testPath(bmd, poly, ARGBHelper.isOpaque)){
 			poly.velocity.x *= -1;
 			poly.velocity.y *= -1;
 		}

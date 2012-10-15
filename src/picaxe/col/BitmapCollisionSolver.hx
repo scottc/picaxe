@@ -18,7 +18,13 @@ import picaxe.shape.Body;
 class BitmapCollisionSolver
 {
 	public static function testPath(bitmapData:BitmapData, s:Shape, condition:Int->Bool):Bool {
-		return testPath2(bitmapData, BitmapShapeSolver.shape(s), Point.fromVector(s), Point.fromVector(s.clone().add(s.velocity)), condition);
+		return testPath2(
+			bitmapData, 
+			BitmapShapeSolver.shape(s), 
+			Point.fromVector(s), 
+			Point.fromVector(s.clone().add(s.velocity)), 
+			condition
+		);
 	}
 	public static function testPath2(bitmapData:BitmapData, bms:BitmapShape, from:Point, to:Point,condition:Int->Bool):Bool {
 		
