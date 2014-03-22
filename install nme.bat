@@ -1,2 +1,0 @@
-haxelib install nme
-pause

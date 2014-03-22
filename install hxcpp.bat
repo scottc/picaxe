@@ -1,2 +1,0 @@
-haxelib install hxcpp
-pause

@@ -1,7 +1,0 @@
--cp src
--swf bin\picaxe.swf
--main Main
--debug
--swf-version 10
--swf-header 550:400:60:FFFFFF
---remap nme:flash
