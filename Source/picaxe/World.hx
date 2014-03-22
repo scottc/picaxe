@@ -5,14 +5,9 @@
 
 package picaxe;
 
-
-#if flash
 import flash.Lib;
 import flash.events.Event;
-#else
-import nme.Lib;
-import nme.events.Event;
-#end
+
 
 import haxe.Timer;
 

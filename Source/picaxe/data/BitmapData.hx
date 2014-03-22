@@ -5,9 +5,4 @@
 
 package picaxe.data;
 
-typedef BitmapData =
-#if flash
-flash.display.BitmapData;
-#else
-nme.display.BitmapData;
-#end
+typedef BitmapData = flash.display.BitmapData;
